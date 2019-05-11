@@ -9,20 +9,22 @@ public class Unit : MonoBehaviour
     float speed = 3;
     Vector3[] path;
     int targetIndex;
-    destroythis Entrance;
+    doorDetection Entrance;
     public bool isFollowing;
     EnemyController thisZombie;
 
     void Start()
     {
+        roomManagement roomManager = GameObject.Find("RoomManager").GetComponent<roomManagement>();
+        speed = Random.Range(2, (roomManager.NumRooms() / 2.5f) + 2);
         thisZombie = GetComponent<EnemyController>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        Entrance = GameObject.FindGameObjectWithTag("Player").GetComponent<destroythis>();
+        Entrance = GameObject.FindGameObjectWithTag("Player").GetComponent<doorDetection>();
         isFollowing = false;
     }
     private void Update()
     {
-        if (Entrance.start && !isFollowing)
+        if (Entrance.startFollow && !isFollowing)
         {
             StartCoroutine(startPath());
         }
@@ -35,8 +37,7 @@ public class Unit : MonoBehaviour
             PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
             yield return new WaitForSeconds(0.3f);
         }
-       
-        
+      
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)

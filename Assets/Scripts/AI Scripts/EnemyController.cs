@@ -1,170 +1,133 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
 
     private int enemyHealth;
-    destroythis startFollow;
-    public GameObject Player;
-    private Animator enemyAnim;
-    public float speed;
     public float dieTimer;
-    public waypointManager waypoints;
+    public bool playdeathnow, startAttack, isDead;
 
-    private GameObject arAmmoBox;
-    private GameObject gAmmoBox;
-    private GameObject healthBox;
-    public GameObject[] enemies;
-    public float randomSway;
+    public AudioClip hitsound,deathsound;
+    private AudioSource zombiesource;
+    private Animator enemyAnim;
+    private GameObject Player, arAmmoBox, gAmmoBox, healthBox;
     private IEnumerator coroutine;
-    public bool startAttack;
-    roomManagement roomManager;
-    public AudioClip hitsound;
-    public AudioClip deathsound;
-    public AudioSource zombiesource;
-    public bool playdeathnow;
-    public bool isDead;
 
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
-
-        isDead = false;
-        playdeathnow = true;
-        zombiesource = GetComponent<AudioSource>();
-        enemies = GameObject.FindGameObjectsWithTag("enemy");
-        waypoints = GameObject.Find("RoomManager").GetComponent<waypointManager>();
-        Player = GameObject.FindGameObjectWithTag("Player");
-        startFollow = Player.GetComponent<destroythis>();
+        dieTimer = 0;
         enemyAnim = GetComponent<Animator>();
-        enemyAnim.SetBool("walking", true);
-        enemyAnim.SetBool("attacking", false);
-        enemyAnim.SetBool("dying", false);
-        startAttack = true;
-        arAmmoBox = Resources.Load<GameObject>("AmmoBox");
-        gAmmoBox = Resources.Load<GameObject>("AmmoBox");
-        healthBox = Resources.Load<GameObject>("HealthBox");
-        randomSway = Random.Range(-2f, 2f);
+        SetBooleans();
+        zombiesource = GetComponent<AudioSource>();
+        Player = GameObject.FindGameObjectWithTag("Player");
+        SetLootDrops();
         enemyHealth = 150;
-        roomManager = GameObject.FindGameObjectWithTag("RoomManager").GetComponent<roomManagement>();
-        speed = Random.Range(2,(roomManager.NumRooms()/2.5f)+2);
-        coroutine = damagePlayer(25);
-        Player.GetComponent<AudioSource>().clip = deathsound;
-
-
+        coroutine = DamagePlayer(25);
     }
 
-   
-
-    public void FollowPlayer()
-    {
-        enemyAnim.SetBool("walking", true);
-        enemyAnim.SetBool("attacking", false);
-     
-    }
     public void AttackPlayer()
     {
         transform.LookAt(new Vector3(Player.transform.position.x, 0f, Player.transform.position.z));
         enemyAnim.SetBool("walking", false);
         enemyAnim.SetBool("attacking", true);
-        
     }
-    public void enemyAI()
+
+    public void DropLoot()
+    {
+        float spawnChance = 30;
+        float rand = Random.Range(0, 100);
+        if (rand < spawnChance)
+        {
+            if (rand < 10)
+            {
+                Instantiate(arAmmoBox, transform.position + new Vector3(0, 0.25f, 0), Quaternion.identity);
+            }
+            else if (rand < 20)
+            {
+                Instantiate(gAmmoBox, transform.position + new Vector3(0, 0.25f, 0), Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(healthBox, transform.position + new Vector3(0, 0.10f, 0), Quaternion.identity);
+            }
+        }
+        Destroy(gameObject);
+    }
+
+    public void EnemyAI()
     {
         if (Vector3.Distance(Player.transform.position, transform.position) > 2.5)
         {
-           
             startAttack = true;
             FollowPlayer();
             StopCoroutine(coroutine);
         }
         else
         {
-          
             AttackPlayer();
-            if(startAttack)
+            if (startAttack)
                 StartCoroutine(coroutine);
         }
     }
-    IEnumerator damagePlayer(int damage)
-    {
-        
-        while (true)
-        {
-                startAttack = false;
-                Player.GetComponent<PlayerHealthManager>().GiveDamage(damage);
-                zombiesource.clip = hitsound;
-                zombiesource.Play();
-                yield return new WaitForSeconds(2);
-                startAttack = true;
-        }
 
-    }
-    public void playdeath()
-    {
-        if (playdeathnow)
-        {
-            Player.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(deathsound);
-            
-        }
-        playdeathnow = false;
-    }
-
-   
     public void EnemyManager()
     {
-        enemies = GameObject.FindGameObjectsWithTag("enemy");
-        
         if (enemyHealth <= 0)
         {
-            GetComponent<Collider>().enabled = false;
-            isDead = true;
-            playdeath();
-            enemyAnim.SetBool("dying", true);
-            enemyAnim.SetBool("walking", false);
-            enemyAnim.SetBool("attacking", false);
-           
+            StartDeath();
             dieTimer += Time.deltaTime;
             if (dieTimer > 3)
             {
-                
-                float spawnChance = 30;
-                float rand = Random.Range(0, 100);
-                if (rand < spawnChance)
-                {
-                    if (rand < 10)
-                    {
-                        Instantiate(arAmmoBox, transform.position + new Vector3(0, 0.25f, 0), Quaternion.identity);
-                    }
-                    else if (rand < 20)
-                    {
-                        Instantiate(gAmmoBox, transform.position + new Vector3(0, 0.25f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(healthBox, transform.position + new Vector3(0,0.10f,0), Quaternion.identity);
-                    }
-                }
-                Destroy(gameObject);
+                DropLoot();
             }
         }
         else
         {
-            enemyAI();
+            EnemyAI();
         }
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void FollowPlayer()
     {
-        EnemyManager();
-       
+        enemyAnim.SetBool("walking", true);
+        enemyAnim.SetBool("attacking", false);
+    }
+
+    public void PlayDeath()
+    {
+        if (playdeathnow)
+        {
+            Player.transform.GetChild(1).GetComponent<AudioSource>().PlayOneShot(deathsound);
+        }
+        playdeathnow = false;
+    }
+
+    public void SetLootDrops()
+    {
+        arAmmoBox = Resources.Load<GameObject>("AmmoBox");
+        gAmmoBox = Resources.Load<GameObject>("AmmoBox");
+        healthBox = Resources.Load<GameObject>("HealthBox");
+    }
+
+    public void SetBooleans()
+    {
+        enemyAnim.SetBool("walking", true);
+        enemyAnim.SetBool("attacking", false);
+        enemyAnim.SetBool("dying", false);
+        startAttack = true;
+        isDead = false;
+        playdeathnow = true;
+    }
+
+    public void StartDeath()
+    {
+        GetComponent<Collider>().enabled = false;
+        isDead = true;
+        PlayDeath();
+        enemyAnim.SetBool("dying", true);
+        enemyAnim.SetBool("walking", false);
+        enemyAnim.SetBool("attacking", false);
     }
 
     public void TakeDamage(int damage)
@@ -173,4 +136,23 @@ public class EnemyController : MonoBehaviour
         enemyHealth -= damage;
     }
 
+    IEnumerator DamagePlayer(int damage)
+    {
+        
+        while (true)
+        {
+            startAttack = false;
+            Player.GetComponent<PlayerHealthManager>().GiveDamage(damage);
+            zombiesource.PlayOneShot(hitsound);
+            yield return new WaitForSeconds(2);
+            startAttack = true;
+        }
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        EnemyManager();  
+    }
 }

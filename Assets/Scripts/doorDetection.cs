@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class doorDetection : MonoBehaviour
 {
@@ -8,14 +6,10 @@ public class doorDetection : MonoBehaviour
     public bool doorRight;
     public bool doorUp;
     public bool doorDown;
-    public bool currentPlane;
-    public GameObject doorLeftChild;
-    public GameObject doorRightChild;
-    public GameObject doorUpChild;
-    public GameObject doorDownChild;
+    public bool startFollow;
     public enemymanager enemyManager;
     public int numenem;
-    public GameObject coll;
+    
 
     void OnTriggerEnter(Collider collision)
     {
@@ -50,17 +44,12 @@ public class doorDetection : MonoBehaviour
                 }
             }
         }
-       // Debug.Log(collision.gameObject.tag);
-       // collision.gameObject.SetActive(false);
-           
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.tag == "entrance")
+        {
+            Destroy(collision.gameObject);
+            startFollow = true;
+        }
+
     }
 
     public void SetBoolsFalse()
