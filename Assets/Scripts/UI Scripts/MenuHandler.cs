@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 
@@ -17,7 +14,7 @@ public class MenuHandler : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("WillTest");
+        SceneManager.LoadScene("MainGame");
     }
     public void Instructions()
     {
@@ -25,7 +22,7 @@ public class MenuHandler : MonoBehaviour
     }
     public void MainMenu()
     {
-        SceneManager.LoadScene("mainmenu");
+        SceneManager.LoadScene("MainMenu");
     }
     public void PauseGame()
     {

@@ -221,7 +221,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144928791
 GameObject:
@@ -312,7 +312,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &145954119
 PrefabInstance:
@@ -386,24 +386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c753c119dbb33c4a8036c77da4a2870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 0
   Player: {fileID: 930880088}
-  warning: {fileID: 0}
-  enemies: []
-  randomSway: 0
   startAttack: 0
-  rockPrefab: {fileID: 117232, guid: d2f192c371f0f7f408ef6d3471aa68ca, type: 3}
-  rockSpeed: 0
-  deathsound: {fileID: 0}
-  zombiesource: {fileID: 0}
-  laserAttack: 0
-  playdeathnow: 0
-  fireDaLazers: 0
   fireRocks: 0
-  lazer1: {fileID: 0}
-  ways: []
-  way1: 0
-  activateWarning: 0
+  rockPrefab: {fileID: 117232, guid: d2f192c371f0f7f408ef6d3471aa68ca, type: 3}
 --- !u!65 &145954122
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -970,7 +956,7 @@ PrefabInstance:
     - target: {fileID: 4385956664316209778, guid: b811b68da6e017445b981fd07d0f6e24,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4385956664316209778, guid: b811b68da6e017445b981fd07d0f6e24,
         type: 3}
@@ -1092,7 +1078,13 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 89.899994
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2764760397217237880, guid: b811b68da6e017445b981fd07d0f6e24,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2764760397217237880, guid: b811b68da6e017445b981fd07d0f6e24, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b811b68da6e017445b981fd07d0f6e24, type: 3}
 --- !u!224 &329802576 stripped
 RectTransform:
@@ -1189,7 +1181,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &497230850
 PrefabInstance:
@@ -1459,24 +1451,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c753c119dbb33c4a8036c77da4a2870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 0
   Player: {fileID: 0}
-  warning: {fileID: 0}
-  enemies: []
-  randomSway: 0
   startAttack: 0
-  rockPrefab: {fileID: 117232, guid: d2f192c371f0f7f408ef6d3471aa68ca, type: 3}
-  rockSpeed: 0
-  deathsound: {fileID: 0}
-  zombiesource: {fileID: 0}
-  laserAttack: 0
-  playdeathnow: 0
-  fireDaLazers: 0
   fireRocks: 0
-  lazer1: {fileID: 0}
-  ways: []
-  way1: 0
-  activateWarning: 0
+  rockPrefab: {fileID: 117232, guid: d2f192c371f0f7f408ef6d3471aa68ca, type: 3}
 --- !u!1 &561980853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,8 +1519,77 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &612939119
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1000010759127040, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_Name
+      value: TrollGiant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.265464
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 17.094645
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 134568deae123e7488798bf153729a7a, type: 3}
 --- !u!1001 &705148803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1593,7 +1640,7 @@ PrefabInstance:
     - target: {fileID: 2836496983128532359, guid: 8be65480b7272a84e9959e35f2be223f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2836496983128532359, guid: 8be65480b7272a84e9959e35f2be223f,
         type: 3}
@@ -1881,7 +1928,7 @@ Transform:
   - {fileID: 213511527}
   - {fileID: 1034127542}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
 --- !u!1 &930880088 stripped
 GameObject:
@@ -2042,24 +2089,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d410e753607a4941a7951ef2d573af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 0
   Player: {fileID: 930880088}
-  warning: {fileID: 0}
-  enemies: []
-  randomSway: 0
-  startAttack: 0
+  lazer1: {fileID: 523683593}
+  lazer2: {fileID: 145954120}
   rockPrefab: {fileID: 117232, guid: d2f192c371f0f7f408ef6d3471aa68ca, type: 3}
-  rockSpeed: 100
+  enemies: []
+  warning: {fileID: 0}
   deathsound: {fileID: 8300000, guid: b5b6d7789c977a84681fc1a8d34ef770, type: 3}
   zombiesource: {fileID: 983719524}
   laserAttack: 0
-  playdeathnow: 0
-  fireDaLazers: 0
+  enemyHealth: 0
+  lazerZombieTime: 0
   fireRocks: 0
-  lazer1: {fileID: 523683593}
-  lazer2: {fileID: 145954120}
-  ways: []
-  way1: 0
+  startAttack: 0
+  way: 0
   activateWarning: 0
 --- !u!54 &983719527
 Rigidbody:
@@ -2366,7 +2409,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1520463095
 PrefabInstance:
@@ -2549,7 +2592,7 @@ PrefabInstance:
     - target: {fileID: 286547923104340047, guid: 0658a76ad65ab5f48a8811b4d1e5c131,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 286547923104340047, guid: 0658a76ad65ab5f48a8811b4d1e5c131,
         type: 3}
@@ -3012,7 +3055,7 @@ Transform:
   - {fileID: 870610628}
   - {fileID: 1893057041}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
 --- !u!114 &2082040362 stripped
 MonoBehaviour:

@@ -4,22 +4,21 @@ using System.Collections;
 public class Unit : MonoBehaviour
 {
 
-
     public Transform target;
     float speed = 3;
     Vector3[] path;
     int targetIndex;
-    doorDetection Entrance;
+    DoorDetection Entrance;
     public bool isFollowing;
     EnemyController thisZombie;
 
     void Start()
     {
-        roomManagement roomManager = GameObject.Find("RoomManager").GetComponent<roomManagement>();
+        RoomManagement roomManager = GameObject.Find("RoomManager").GetComponent<RoomManagement>();
         speed = Random.Range(2, (roomManager.NumRooms() / 2.5f) + 2);
         thisZombie = GetComponent<EnemyController>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        Entrance = GameObject.FindGameObjectWithTag("Player").GetComponent<doorDetection>();
+        Entrance = GameObject.FindGameObjectWithTag("Player").GetComponent<DoorDetection>();
         isFollowing = false;
     }
     private void Update()
