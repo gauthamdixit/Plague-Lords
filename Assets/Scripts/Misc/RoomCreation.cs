@@ -15,14 +15,9 @@ public class RoomCreation : MonoBehaviour
     private RoomManagement roomManager;
     private DoorDetection doorDetection;
 
-
-    void Start()
-    {
-        SetUpRoomCreation();
-        SpawnObjectsInRoom();
-        SpawnEnemies();
-    }
-
+    // gives each door a chance of entering the boss fight 
+    // minRoomsToSpawn is the minimum number of rooms the player has to go through for the boss fight to be possible
+    // after maxRoomsToSpawn is reached, the bossfight is guaranteed
     public void BossSpawnProbability(int minRoomsToSpawn, int maxRoomsToSpawn)
     {
         int spawnBossRoom = 0;
@@ -36,7 +31,7 @@ public class RoomCreation : MonoBehaviour
             SceneManager.LoadScene("BossFight");
         }
     }
-
+    //generates the room prefab
     public void CreateRoom(Vector3 pos, int child)
     {
         startTimer = true;
@@ -48,7 +43,7 @@ public class RoomCreation : MonoBehaviour
         StartCoroutine(InactiveToActive(doorDestroy));
         currentPlane = false;
     }
-
+    //only allows numRooms amount of rooms to be active at any given point in the game
     public void DeletePreviousRooms(int numRooms)
     {
         if (roomManager.NumRooms() > numRooms)
@@ -64,7 +59,7 @@ public class RoomCreation : MonoBehaviour
             }
         }
     }
-
+    // checks if the player has entered a door and generates a room based on which door the player passed through
     public void MapAI()
     {
 
@@ -90,7 +85,7 @@ public class RoomCreation : MonoBehaviour
         DeletePreviousRooms(1);
 
     }
-
+    //returns a random point in the room for an enemy to spawn
     public Vector3 RandomSpawnPoint()
     {
         int spawnbuffer = 5;
@@ -98,7 +93,7 @@ public class RoomCreation : MonoBehaviour
             , 0.05f, Random.Range(transform.position.z - (scaleMultiplier / 2) + spawnbuffer, transform.position.z + (scaleMultiplier / 2) - spawnbuffer));
         return spawnpoint;
     }
-
+    //Creates the room at position pos and deletes the door child from the room asset depending on which door the player passed through previously
     public void RoomAI(Vector3 pos, int child)
     {
         BossSpawnProbability(4, 7);
@@ -136,7 +131,7 @@ public class RoomCreation : MonoBehaviour
         roomManager.AddRoom(gameObject);
         currentPlane = true;
     }
-    
+    //spawns zombies per room
     public void SpawnEnemies()
     {
         int i = 0;
@@ -148,7 +143,8 @@ public class RoomCreation : MonoBehaviour
             i++;
         }
     }
-
+    //gets all the objects in the room prefab under persisting room and gives them a 35% chance of being set inactive
+    //to make each room slightly different than the others
     private void SpawnObjectsInRoom()
     {
         Transform room = transform.Find("Persisting Room");
@@ -166,7 +162,7 @@ public class RoomCreation : MonoBehaviour
             }
         }
     }
-
+    //Updates text field "number of hostiles"
     public void UpdateNumEnemies()
     {
         int i = 0;
@@ -178,12 +174,19 @@ public class RoomCreation : MonoBehaviour
         numEnemies = i;
         text.text = i + " hostiles remaining";
     }
-
+    //sets the door the player entered to inactive so the player can pass through and then back to active so the player can't go back through
     IEnumerator InactiveToActive(GameObject door)
     {
         door.SetActive(false);
         yield return new WaitForSeconds(1);
         door.SetActive(true);
+    }
+
+    void Start()
+    {
+        SetUpRoomCreation();
+        SpawnObjectsInRoom();
+        SpawnEnemies();
     }
 
     void Update()

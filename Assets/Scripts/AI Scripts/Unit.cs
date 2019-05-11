@@ -21,7 +21,7 @@ public class Unit : MonoBehaviour
         Entrance = GameObject.FindGameObjectWithTag("Player").GetComponent<DoorDetection>();
         isFollowing = false;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (Entrance.startFollow && !isFollowing)
         {
@@ -52,8 +52,10 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        Vector3 currentWaypoint = path[0];
-        while (true)
+        Vector3 currentWaypoint = Vector3.zero;
+        if (path.Length>0)
+            currentWaypoint = path[0];
+        while (path.Length>0)
         {
             if (transform.position == currentWaypoint)
             {

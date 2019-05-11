@@ -289,7 +289,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36, y: -7}
+  m_AnchoredPosition: {x: 36, y: -26}
   m_SizeDelta: {x: 990, y: 236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &385251176
@@ -325,8 +325,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "DEVELOPERS: \nGautham Dixit\nWill Pye\nRasmus Grunnet-Jepsen\n\nRiker Lastname\nTony
-    Radtke\nPatrick Perrine\n"
+  m_Text: "DEVELOPER: \n\nGautham Dixit\n"
 --- !u!222 &385251177
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -575,7 +574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36, y: 127}
+  m_AnchoredPosition: {x: 36, y: 160}
   m_SizeDelta: {x: 990, y: 236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &962046442
